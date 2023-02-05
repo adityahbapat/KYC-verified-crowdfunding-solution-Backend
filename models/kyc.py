@@ -140,6 +140,46 @@ def kycUserCreate(request, db):
     print(json.loads(request.form.get("data2")))
     try:
         data = json.loads(request.form.get("data2"))
+
+        headers1={ "Content-Type": "application/json",
+        "apy-token": "APT0EppjfyDqxgfYbu4iQllrhIhETXsrnlQEvancq2Vu5Sj" }
+
+
+        data1 = '{"email":"'+data["email"]+'"}'
+        res = requests.post("https://api.apyhub.com/validate/email/dns", data = data1,
+        headers=headers1 )
+        # res = res.json()
+        print("res -- ",res.json())
+        res = res.json()
+        # print("res status --", res.status())
+        if(not res["data"]):
+            return Response(
+                response=json.dumps({
+                "message":"User Email not valid"
+            }),
+            status = 400,
+            mimetype="application/json"
+            )
+
+
+        headers1={ "Content-Type": "application/json",
+            "apy-token": "APT0EppjfyDqxgfYbu4iQllrhIhETXsrnlQEvancq2Vu5Sj" }
+        data1 = '{"postcode":"'+str(data["pincode"])+'"}'
+        res = requests.post("https://api.apyhub.com/validate/postcodes/in", data = data1,
+        headers=headers1 )
+        # res = res.json()
+        print("res -- ",res.json())
+        res = res.json()
+        # print("res status --", res.status())
+        if(not res["data"]):
+            return Response(
+                response=json.dumps({
+                "message":"User Pincode not valid"
+            }),
+            status = 400,
+            mimetype="application/json"
+            )
+
         if request.files:
             image = request.files["document"]
             directory = upload_image(image)
@@ -194,7 +234,7 @@ def camera(request, db):
     data= json.loads(request.data)
     dirname = data["dirname"]
     print(dirname)
-    t=int(1500)
+    t=int(1000)
     cam = cv2.VideoCapture(0)
     cv2.namedWindow("Test")
     count = 0
@@ -206,7 +246,7 @@ def camera(request, db):
         cv2.imshow("Test",img)
         mins,secs=divmod(t,60)
 		#timer='{:02d}:{02d}'.format(mins,secs)
-        if(t==500 or t==1000):
+        if(t==500 or t==750):
             print("Image "+str(count)+"saved")
             cv2.imwrite(r'C:\Users\Aditya Bapat\Downloads\kyc_images\imgdatabase'+str(dirname)+'\\Dataset\\cam'+str(count)+'.jpeg', img)
             count +=1
@@ -214,7 +254,7 @@ def camera(request, db):
             
         time.sleep(0.01)
             
-        t-=1
+        t-=2
         #cv2.imshow("Test",img)
         if(t==0 and cv2.waitKey(1)):
             print("Close")
