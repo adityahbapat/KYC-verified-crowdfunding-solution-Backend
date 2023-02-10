@@ -2,6 +2,9 @@
 
 ### Complete Backend in Github - production branch
 
+Do configure all folders to save the images extracted by our deep face model. <br/>
+Currently they are saved in the Downloads folder > kyc_images > Uploads
+
 First Create a Virtual Environment and activate it
 
 To install virtualenv in Python
