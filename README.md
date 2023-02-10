@@ -1,5 +1,4 @@
-# HackThisFall-backend 
-Backend for Hack This Fall Season 3  - backend
+## KYC verified crowdfunding solution-Backend 
 
 ### Complete Backend in Github - production branch
 
@@ -37,7 +36,7 @@ pip install -r requirements.txt
 Then create a .env file in the project directory and paste the following code in it - 
 
 ```
-database  = "mongodb+srv://kushal:kushalshah@hackthisfall3.magux9v.mongodb.net/?retryWrites=true&w=majority"
+database  = "database url"
 
 ```
 
@@ -50,8 +49,8 @@ To run the backend application in local, the command is -
 python app.py
 ```
 
-# Github Workspace 
+### Video Explanation of the project
+https://www.youtube.com/watch?v=95f56iuBGOA
 
-Public Workspace - https://www.postman.com/shahkushal38/workspace/hackthisfall/overview
-
-For .env file check environment.txt
+### Frontend
+https://github.com/adityahbapat/KYC-verified-crowdfunding-solution-Frontend
